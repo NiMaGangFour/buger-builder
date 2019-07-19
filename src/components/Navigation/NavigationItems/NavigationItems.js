@@ -6,7 +6,7 @@ import NavigationItem from "./NavigationItem/NavigationItem";
 const NavigationItems = () => (
   <ul className={classes.NavigationItems}>
     <NavigationItem link="/" active>
-      Buger BUilder
+      Buger Builder
     </NavigationItem>
     <NavigationItem link="/">Checkout</NavigationItem>
   </ul>

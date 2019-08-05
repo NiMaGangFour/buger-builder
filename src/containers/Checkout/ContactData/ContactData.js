@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Button from "../../../components/UI/Button/Button";
-
+import classes from "./ContactData.css";
 class ContactData extends Component {
   state = {
     name: "",
@@ -8,16 +8,43 @@ class ContactData extends Component {
     street: "",
     postal: ""
   };
+
+  orderHandler = event => {
+    event.preventDefault();
+    console.log(this.props.ingredients);
+  };
   render() {
     return (
-      <div>
+      <div className={classes.ContactData}>
         <h4>Enter your contact data</h4>
         <form>
-          <input type="text" name="name" placeholder="Your Name" />
-          <input type="text" name="email" placeholder="Your Email" />
-          <input type="text" name="street" placeholder="Your Street" />
-          <input type="text" name="postal" placeholder="Your Postal" />
-          <Button btnType="Success">ORDER</Button>
+          <input
+            className={classes.Input}
+            type="text"
+            name="name"
+            placeholder="Your Name"
+          />
+          <input
+            className={classes.Input}
+            type="text"
+            name="email"
+            placeholder="Your Email"
+          />
+          <input
+            className={classes.Input}
+            type="text"
+            name="street"
+            placeholder="Your Street"
+          />
+          <input
+            className={classes.Input}
+            type="text"
+            name="postal"
+            placeholder="Your Postal"
+          />
+          <Button clicked={this.orderHandler} btnType="Success">
+            ORDER
+          </Button>
         </form>
       </div>
     );

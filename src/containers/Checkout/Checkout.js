@@ -16,7 +16,6 @@ class Checkout extends Component {
     this.setState({
       ingredients: ingredients
     });
-    // console.log(this.props);
   }
 
   checkoutCancelledHandler = () => {

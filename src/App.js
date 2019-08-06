@@ -5,6 +5,7 @@ import "./App.css";
 import BurgerBuilder from "./containers/BugerBuilder/BurgerBuilder";
 import Layout from "./hoc/Layout/Layout";
 import Checkout from "./containers/Checkout/Checkout";
+import Orders from "./containers/Orders/Orders";
 
 class App extends Component {
   render() {
@@ -13,6 +14,7 @@ class App extends Component {
         <Layout>
           <Switch>
             <Route path="/checkout" component={Checkout} />
+            <Route path="/orders" component={Orders} />
             <Route path="/" component={BurgerBuilder} />
           </Switch>
         </Layout>

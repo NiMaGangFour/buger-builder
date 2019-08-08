@@ -5,6 +5,7 @@ import classes from "./ContactData.css";
 import axios from "../../../axios-orders";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Modal/Input/Input";
+import { identifier } from "@babel/types";
 
 class ContactData extends Component {
   state = {
@@ -17,7 +18,6 @@ class ContactData extends Component {
         },
         value: ""
       },
-
       street: {
         elementType: "input",
         elementConfig: {
@@ -69,8 +69,8 @@ class ContactData extends Component {
     event.preventDefault();
     this.setState({ loading: true });
     const order = {
-      ingredients: this.props.ingredients,
-      price: this.props.price
+      ingrediencts: this.props.ingredients,
+      price: this.props.prie
     };
     axios
       .post("/orders.json", order)
@@ -84,6 +84,21 @@ class ContactData extends Component {
         console.log(error);
       });
     console.log(this.props);
+  };
+
+  inputChangedHandler = (event, inputIdentifier) => {
+    const updatedOrderForm = {
+      ...this.state.orderForm
+    };
+    const updatedFormElement = {
+      ...updatedOrderForm[inputIdentifier]
+    };
+
+    updatedFormElement.value = event.target.value;
+    updatedOrderForm[inputIdentifier] = updatedFormElement;
+    this.setState({ orderForm: updatedOrderForm });
+
+    console.log(event.target.value);
   };
 
   render() {
@@ -104,6 +119,7 @@ class ContactData extends Component {
               elementType={formElement.config.elementType}
               elementConfig={formElement.config.elementConfig}
               value={formElement.config.value}
+              changed={event => this.inputChangedHandler(event, formElement.id)}
             />
           ))}
           <Button clicked={this.orderHandler} btnType="Success">

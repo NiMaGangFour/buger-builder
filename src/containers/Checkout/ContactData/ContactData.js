@@ -4,14 +4,63 @@ import Button from "../../../components/UI/Button/Button";
 import classes from "./ContactData.css";
 import axios from "../../../axios-orders";
 import Spinner from "../../../components/UI/Spinner/Spinner";
+import Input from "../../../components/UI/Modal/Input/Input";
 
 class ContactData extends Component {
   state = {
-    name: "",
-    email: "",
-    street: "",
-    postal: "",
-    loading: false
+    name: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "Your Name"
+      },
+      value: ""
+    },
+
+    street: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "Your street"
+      },
+      value: ""
+    },
+    zipCode: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "Your zipCode"
+      },
+      value: ""
+    },
+    country: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "Your country"
+      },
+      value: ""
+    },
+
+    email: {
+      elementType: "input",
+      elementConfig: {
+        type: "text",
+        placeholder: "Your email"
+      },
+      value: ""
+    },
+
+    deliveryMethod: {
+      elementType: "input",
+      elementConfig: {
+        options: [
+          { value: "fastest", displayValue: "Fastest" },
+          { value: "cheapest", displayValue: "Cheapest" }
+        ]
+      },
+      value: ""
+    }
   };
 
   orderHandler = event => {
@@ -19,17 +68,7 @@ class ContactData extends Component {
     this.setState({ loading: true });
     const order = {
       ingredients: this.props.ingredients,
-      price: this.props.price,
-      customer: {
-        name: "Siyu",
-        address: {
-          street: "Hytten Place",
-          zipCode: "2617",
-          country: "Australia"
-        },
-        email: "nimafour@gmail.com"
-      },
-      deliveryMethod: "E饿了么"
+      price: this.props.price
     };
     axios
       .post("/orders.json", order)
@@ -49,26 +88,21 @@ class ContactData extends Component {
       <div>
         <h4>Enter your contact data</h4>
         <form>
-          <input
-            className={classes.Input}
-            type="text"
-            name="name"
-            placeholder="Your Name"
-          />
-          <input
-            className={classes.Input}
+          <Input elementType="..." elementConfig="..." value="..." />
+          <Input
+            inputtype="input"
             type="text"
             name="email"
             placeholder="Your Email"
           />
-          <input
-            className={classes.Input}
+          <Input
+            inputtype="input"
             type="text"
             name="street"
             placeholder="Your Street"
           />
-          <input
-            className={classes.Input}
+          <Input
+            inputtype="input"
             type="text"
             name="postal"
             placeholder="Your Postal"

@@ -16,31 +16,50 @@ class ContactData extends Component {
           type: "text",
           placeholder: "Your Name"
         },
-        value: ""
+        value: "",
+        validation: {
+          required: true
+        },
+        valid: false
       },
+
       street: {
         elementType: "input",
         elementConfig: {
           type: "text",
           placeholder: "Your street"
         },
-        value: ""
+        value: "",
+        validation: {
+          required: true
+        },
+        valid: false
       },
+
       zipCode: {
         elementType: "input",
         elementConfig: {
           type: "text",
           placeholder: "Your zipCode"
         },
-        value: ""
+        value: "",
+        validation: {
+          required: true
+        },
+        valid: false
       },
+
       country: {
         elementType: "input",
         elementConfig: {
           type: "text",
           placeholder: "Your country"
         },
-        value: ""
+        value: "",
+        validation: {
+          required: true
+        },
+        valid: false
       },
 
       email: {
@@ -49,7 +68,11 @@ class ContactData extends Component {
           type: "text",
           placeholder: "Your email"
         },
-        value: ""
+        value: "",
+        validation: {
+          required: true
+        },
+        valid: false
       },
 
       deliveryMethod: {
@@ -77,7 +100,7 @@ class ContactData extends Component {
     }
     const order = {
       ingrediencts: this.props.ingredients,
-      price: this.props.prie,
+      price: Number.parseFloat(this.props.price).toFixed(2),
       orderData: formData
     };
     axios

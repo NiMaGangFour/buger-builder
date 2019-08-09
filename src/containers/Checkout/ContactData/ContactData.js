@@ -5,7 +5,6 @@ import classes from "./ContactData.css";
 import axios from "../../../axios-orders";
 import Spinner from "../../../components/UI/Spinner/Spinner";
 import Input from "../../../components/UI/Modal/Input/Input";
-import { identifier } from "@babel/types";
 
 class ContactData extends Component {
   state = {
@@ -90,9 +89,11 @@ class ContactData extends Component {
             { value: "cheapest", displayValue: "Cheapest" }
           ]
         },
-        value: "fastest"
+        value: "fastest",
+        valid: true
       }
-    }
+    },
+    formIsValid: false
   };
 
   orderHandler = event => {
@@ -153,7 +154,13 @@ class ContactData extends Component {
     updatedFormElement.touched = true;
     console.log(updatedFormElement.valid);
     updatedOrderForm[inputIdentifier] = updatedFormElement;
-    this.setState({ orderForm: updatedOrderForm });
+
+    let formIsValid = true;
+    for (let inputIdentifier in updatedOrderForm) {
+      formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+    }
+
+    this.setState({ orderForm: updatedOrderForm, formIsValid: formIsValid });
 
     console.log(event.target.value);
   };
@@ -182,7 +189,9 @@ class ContactData extends Component {
               changed={event => this.inputChangedHandler(event, formElement.id)}
             />
           ))}
-          <Button btnType="Success">ORDER</Button>
+          <Button btnType="Success" disabled={!this.state.formIsValid}>
+            ORDER
+          </Button>
         </form>
       </div>
     );

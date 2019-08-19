@@ -13,9 +13,6 @@ import * as actionTypes from "../../store/actions";
 
 class BurgerBuilder extends Component {
   state = {
-    // ingredients: null,
-    // totalPrice: 4,
-    purchasable: false,
     purchasing: false,
     loading: false,
     error: false
@@ -35,51 +32,16 @@ class BurgerBuilder extends Component {
 
   updatePurchasableState = ingredients => {
     const sum = Object.keys(ingredients)
-      .map((igKey, index) => ingredients[igKey])
+      .map(igKey => ingredients[igKey])
       .reduce((sum, el) => {
         return sum + el;
       }, 0);
+    // const sum1 = Object.keys(ingredients).map(igKey => ingredients[igKey]);
+    // [1, 0, 0, 0]
+    // console.log(sum1);
 
-    this.setState({
-      purchasable: sum > 0
-    });
-
-    // console.log(sum);
+    return sum > 0;
   };
-
-  // addIngredientHandler = type => {
-  //   const oldCount = this.state.ingredients[type];
-  //   const updatedCount = oldCount + 1;
-  //   const ingredients = { ...this.state.ingredients };
-  //   ingredients[type] = updatedCount;
-
-  //   const priceAddition = INGREDIENT_PRICES[type];
-  //   const oldPrice = this.state.totalPrice;
-  //   const newPrice = oldPrice + priceAddition;
-
-  //   this.setState({
-  //     totalPrice: newPrice,
-  //     ingredients: ingredients
-  //   });
-  //   this.updatePurchasableState(ingredients);
-  // };
-
-  // removeIngredientHandler = type => {
-  //   const oldCount = this.state.ingredients[type];
-  //   const updatedCount = oldCount - 1;
-  //   const ingredients = { ...this.state.ingredients };
-  //   ingredients[type] = updatedCount;
-
-  //   const priceReduction = INGREDIENT_PRICES[type];
-  //   const oldPrice = this.state.totalPrice;
-  //   const newPrice = oldPrice - priceReduction;
-
-  //   this.setState({
-  //     totalPrice: newPrice,
-  //     ingredients: ingredients
-  //   });
-  //   this.updatePurchasableState(ingredients);
-  // };
 
   purchaseHandler = () => {
     this.setState({ purchasing: true });
@@ -136,7 +98,7 @@ class BurgerBuilder extends Component {
             removeIngredientH={this.props.onIngredientRemoved}
             disabled={disabledInfo}
             totalPrice={this.props.price}
-            purchasable={this.state.purchasable}
+            purchasable={this.updatePurchasableState(this.props.ings)}
             purchaseH={this.purchaseHandler}
           />
         </Aux>

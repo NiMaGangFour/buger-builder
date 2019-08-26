@@ -110,7 +110,7 @@ class ContactData extends Component {
       ].value;
     }
     const order = {
-      ingrediencts: this.props.ings,
+      ingredients: this.props.ings,
       price: Number.parseFloat(this.props.price).toFixed(2),
       orderData: formData
     };

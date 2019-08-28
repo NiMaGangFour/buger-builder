@@ -39,30 +39,25 @@ class Auth extends Component {
   };
 
   inputChangedHandler = (event, controlName) => {
-    const updatedOrderForm = {
-      ...this.state.controls
+    const updatedControls = {
+      ...this.state.controls,
+      [controlName]: {
+        ...this.state.controls[controlName],
+        value: event.target.value,
+        valid: this.checkValidity(
+          event.target.value,
+          this.state.controls[controlName].validation
+        ),
+        touched: true
+      }
     };
-    const updatedFormElement = {
-      ...updatedOrderForm[controlName]
-    };
-    updatedFormElement.value = event.target.value;
-    console.log(updatedFormElement.value);
-    updatedFormElement.valid = this.checkValidity(
-      updatedFormElement.value,
-      updatedFormElement.validation
-    );
-    updatedFormElement.touched = true;
-    // console.log(updatedFormElement.valid);
-    updatedOrderForm[controlName] = updatedFormElement;
 
     let formIsValid = true;
-    for (let controlName in updatedOrderForm) {
-      formIsValid = updatedOrderForm[controlName].valid && formIsValid;
+    for (let controlName in updatedControls) {
+      formIsValid = updatedControls[controlName].valid && formIsValid;
     }
 
-    this.setState({ controls: updatedOrderForm, formIsValid: formIsValid });
-
-    console.log(event.target.value);
+    this.setState({ controls: updatedControls, formIsValid: formIsValid });
   };
 
   checkValidity(value, rules) {
@@ -103,6 +98,7 @@ class Auth extends Component {
         ))}
       </div>
     );
+
     return (
       <div className={classes.Auth}>
         <form onSubmit={this.orderHandler}>

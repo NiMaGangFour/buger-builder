@@ -1,10 +1,10 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import Input from "../../components/UI/Input/Input";
 import Button from "../../components/UI/Button/Button";
 import classes from "./Auth.css";
 import * as actions from "../../store/actions/index";
-import connect from "react-redux";
 
 class Auth extends Component {
   state = {

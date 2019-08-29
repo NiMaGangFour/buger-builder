@@ -32,9 +32,11 @@ export const auth = (email, password, isSignUp) => {
     };
     console.log(authData);
 
+    //this URL is endPiont for Sign-Up
     let url =
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBWq-J03yvu_TjocjfGpnVyDAw-5PT0lfo";
     if (!isSignUp) {
+      //this URL is endPiont for Sign-in
       url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBWq-J03yvu_TjocjfGpnVyDAw-5PT0lfo";
     }

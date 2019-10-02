@@ -27,6 +27,7 @@ export const fetchIngredientsFailed = () => {
     type: actionTypes.FETCH_INGREDIENTS_FAILED
   };
 };
+
 export const initIngredients = () => {
   return dispatch => {
     axios

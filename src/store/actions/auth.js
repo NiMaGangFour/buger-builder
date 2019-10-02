@@ -8,10 +8,11 @@ export const authStart = () => {
   };
 };
 
-export const authSuccess = authData => {
+export const authSuccess = (token, userId) => {
   return {
     type: actionTypes.AUTH_SUCCESS,
-    authData: authData
+    idToken: token,
+    userId: userId
   };
 };
 
@@ -32,11 +33,11 @@ export const auth = (email, password, isSignUp) => {
     };
     console.log(authData);
 
-    //this URL is endPiont for Sign-Up
+    //this URL is(firebase Authentication)  endPiont for Sign-Up
     let url =
       "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyBWq-J03yvu_TjocjfGpnVyDAw-5PT0lfo";
     if (!isSignUp) {
-      //this URL is endPiont for Sign-in
+      //this URL is (firebase Authentication) endPiont for Sign-in
       url =
         "https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyBWq-J03yvu_TjocjfGpnVyDAw-5PT0lfo";
     }
@@ -44,11 +45,10 @@ export const auth = (email, password, isSignUp) => {
       .post(url, authData)
       .then(response => {
         console.log(response);
-        dispatch(authSuccess(response.data));
+        dispatch(authSuccess(response.data.idToken, response.data.localId));
       })
       .catch(error => {
-        console.log(error);
-        dispatch(authFail(error.response));
+        dispatch(authFail(error.response.data.error));
       });
   };
 };
